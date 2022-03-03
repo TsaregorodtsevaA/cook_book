@@ -1,0 +1,25 @@
+file = open("Кулинарная книга.txt", encoding='utf-8')
+cook_book = {}
+for line in file:
+    dish_name = str(line.strip())
+    number_of_ingr = int(file.readline())
+    ingrid_list = []
+    for ingrid in range(number_of_ingr):
+        whole_ingrid = (file.readline().strip().split('|'))
+        each_ingrid_list = {'ingredient_name': whole_ingrid[0], 'quantity': whole_ingrid[1], 'measure': whole_ingrid[2]}
+        ingrid_list.append(each_ingrid_list)
+        cook_book = {dish_name: ingrid_list}
+    next_dish = file.readline()
+    # print(cook_book)
+
+    def get_shop_list_by_dishes(dishes, person_count):
+        for key, value in cook_book.items():
+            if key in dishes:
+                for not_list in value:
+                    not_list['quantity'] = int(not_list['quantity'])
+                    final_dict = {not_list['ingredient_name']: {'measure': not_list['measure'], 'quantity': not_list['quantity']*person_count}}
+                    print(final_dict)
+    print(get_shop_list_by_dishes(['Омлет', 'Запеченный картофель'], 2))
+
+
+
